@@ -33,7 +33,7 @@ enum ApplicationStatus {
 }
 
 enum VerificationStatus {
-  PENDING
+  UNVERIFIED
   VERIFIED
   REJECTED
 }
@@ -138,7 +138,7 @@ model Application {
   message                String?            @db.Text
   documentPath           String?
   status                 ApplicationStatus  @default(PENDING)
-  verificationStatus     VerificationStatus @default(PENDING)
+  verificationStatus     VerificationStatus @default(UNVERIFIED)
   createdAt              DateTime           @default(now())
   updatedAt              DateTime           @updatedAt
 

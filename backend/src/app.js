@@ -2,6 +2,7 @@ const cors = require("cors");
 const express = require("express");
 const path = require("path");
 
+const applicationRoutes = require("./routes/applicationRoutes");
 const errorMiddleware = require("./middleware/errorMiddleware");
 const authRoutes = require("./routes/authRoutes");
 const classRoutes = require("./routes/classRoutes");
@@ -30,6 +31,7 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/applications", applicationRoutes);
 app.use("/api/classes", classRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/faculties", facultyRoutes);

@@ -7,6 +7,7 @@ const {
   getFacultyById,
   updateFaculty,
 } = require("../controllers/facultyController");
+const { getCoursesByFaculty } = require("../controllers/courseController");
 const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
 const {
@@ -27,6 +28,7 @@ const facultyImageUpload = [
 ];
 
 router.get("/", getAllFaculties);
+router.get("/:facultyId/courses", getCoursesByFaculty);
 router.get("/:id", getFacultyById);
 router.post(
   "/",

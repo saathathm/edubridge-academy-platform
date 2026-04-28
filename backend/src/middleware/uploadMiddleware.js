@@ -31,26 +31,36 @@ const storage = multer.diskStorage({
   },
 });
 
+const imageMimeTypes = ["image/jpeg", "image/png", "image/webp"];
+
 const allowedMimeTypes = [
-  "image/jpeg",
-  "image/png",
-  "image/webp",
+  ...imageMimeTypes,
   "application/pdf",
   "application/msword",
   "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 ];
 
-const fileFilter = (req, file, cb) => {
-  if (allowedMimeTypes.includes(file.mimetype)) {
-    return cb(null, true);
-  }
+const createFileFilter = (mimeTypes) => {
+  return (req, file, cb) => {
+    if (mimeTypes.includes(file.mimetype)) {
+      return cb(null, true);
+    }
 
-  cb(new Error("Invalid file type"));
+    cb(new Error("Invalid file type"));
+  };
 };
 
 const upload = multer({
   storage,
-  fileFilter,
+  fileFilter: createFileFilter(allowedMimeTypes),
+  limits: {
+    fileSize: Number(process.env.MAX_FILE_SIZE) || 5 * 1024 * 1024,
+  },
+});
+
+const imageUpload = multer({
+  storage,
+  fileFilter: createFileFilter(imageMimeTypes),
   limits: {
     fileSize: Number(process.env.MAX_FILE_SIZE) || 5 * 1024 * 1024,
   },
@@ -64,6 +74,7 @@ const setUploadFolder = (folder) => {
 };
 
 module.exports = {
+  imageUpload,
   upload,
   setUploadFolder,
 };

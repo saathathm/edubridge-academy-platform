@@ -4,6 +4,7 @@ const path = require("path");
 
 const errorMiddleware = require("./middleware/errorMiddleware");
 const authRoutes = require("./routes/authRoutes");
+const facultyRoutes = require("./routes/facultyRoutes");
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/faculties", facultyRoutes);
 
 app.use((req, res) => {
   res.status(404).json({

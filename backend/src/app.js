@@ -4,6 +4,7 @@ const path = require("path");
 
 const errorMiddleware = require("./middleware/errorMiddleware");
 const authRoutes = require("./routes/authRoutes");
+const classRoutes = require("./routes/classRoutes");
 const courseRoutes = require("./routes/courseRoutes");
 const facultyRoutes = require("./routes/facultyRoutes");
 
@@ -29,6 +30,7 @@ app.get("/api/health", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/classes", classRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/faculties", facultyRoutes);
 

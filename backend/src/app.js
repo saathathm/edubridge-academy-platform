@@ -9,6 +9,7 @@ const certificateRoutes = require("./routes/certificateRoutes");
 const classRoutes = require("./routes/classRoutes");
 const courseRoutes = require("./routes/courseRoutes");
 const facultyRoutes = require("./routes/facultyRoutes");
+const testimonialRoutes = require("./routes/testimonialRoutes");
 
 const app = express();
 
@@ -37,6 +38,7 @@ app.use("/api/certificates", certificateRoutes);
 app.use("/api/classes", classRoutes);
 app.use("/api/courses", courseRoutes);
 app.use("/api/faculties", facultyRoutes);
+app.use("/api/testimonials", testimonialRoutes);
 
 app.use((req, res) => {
   res.status(404).json({
